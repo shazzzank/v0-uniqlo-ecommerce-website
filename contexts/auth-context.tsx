@@ -29,6 +29,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Load user from localStorage on mount
   useEffect(() => {
+    // Initialize demo user if not already done
+    const usersJson = localStorage.getItem("uniqlo-users")
+    if (!usersJson) {
+      const demoUser = {
+        id: "demo-user-001",
+        email: "demo@uniqlo.com",
+        password: "Demo@123",
+        name: "Demo User",
+      }
+      localStorage.setItem("uniqlo-users", JSON.stringify([demoUser]))
+    }
+
     const savedUser = localStorage.getItem("uniqlo-user")
     if (savedUser) {
       setUser(JSON.parse(savedUser))

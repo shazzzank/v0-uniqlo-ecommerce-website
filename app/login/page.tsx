@@ -46,6 +46,19 @@ export default function LoginPage() {
         </Link>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Welcome back</h2>
         <p className="mt-2 text-center text-sm text-gray-600">Sign in to your account to continue</p>
+
+        {/* Demo Credentials Hint */}
+        <div className="mt-6 bg-blue-50/80 backdrop-blur-sm border border-blue-200 rounded-2xl p-4">
+          <p className="text-xs font-semibold text-blue-900 mb-2">Demo Credentials</p>
+          <div className="space-y-1 text-xs text-blue-800">
+            <p>
+              <span className="font-medium">Email:</span> demo@uniqlo.com
+            </p>
+            <p>
+              <span className="font-medium">Password:</span> Demo@123
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
