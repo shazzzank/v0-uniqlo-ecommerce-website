@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -25,6 +25,17 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   const [activeTab, setActiveTab] = useState("description")
   const [addedToCart, setAddedToCart] = useState(false)
 
+  useEffect(() => {
+    if (product) {
+      if (!selectedColor && product.colors.length > 0) {
+        setSelectedColor(product.colors[0].name)
+      }
+      if (!selectedSize && product.sizes.length > 0) {
+        setSelectedSize(product.sizes[0])
+      }
+    }
+  }, [product?.id])
+
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -36,13 +47,6 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         </GlassCard>
       </div>
     )
-  }
-
-  if (!selectedColor && product.colors.length > 0) {
-    setSelectedColor(product.colors[0].name)
-  }
-  if (!selectedSize && product.sizes.length > 0) {
-    setSelectedSize(product.sizes[0])
   }
 
   const isWishlisted = isInWishlist(product.id)
@@ -195,17 +199,16 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
               <div className="flex flex-wrap gap-3">
                 {product.colors.map((color) => (
                   <button
-                    key={color.name}
-                    onClick={() => setSelectedColor(color.name)}
+                    key={color}
+                    onClick={() => setSelectedColor(color)}
                     className={`px-4 py-2 rounded-full text-sm font-medium ${
-                      selectedColor === color.name
+                      selectedColor === color
                         ? "bg-black text-white"
                         : "bg-white/60 backdrop-blur-sm border border-gray-200 text-gray-900 hover:bg-gray-50"
                     }`}
-                    style={{ backgroundColor: color.value }}
-                    aria-label={`Color: ${color.name}`}
+                    aria-label={`Color: ${color}`}
                   >
-                    {color.name}
+                    {color}
                   </button>
                 ))}
               </div>
