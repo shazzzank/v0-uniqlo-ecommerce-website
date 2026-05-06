@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "UNIQLO - LifeWear",
   description: "Simple, high-quality, everyday clothing with a practical sense of beauty",
-    generator: 'v0.app'
+  generator: 'v0.app',
 }
 
 export default function RootLayout({
